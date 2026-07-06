@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Node.js Deployment</title>
+
+    <style>
+
+        body{
+
+            font-family:Arial;
+
+            background:#f4f4f4;
+
+            text-align:center;
+
+            margin-top:100px;
+
+        }
+
+        h1{
+
+            color:green;
+
+        }
+
+        p{
+
+            font-size:20px;
+
+        }
+
+        button{
+
+            padding:10px 20px;
+
+            font-size:18px;
+
+            cursor:pointer;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>Node.js Application</h1>
+
+<p>Hosted using PM2 + Nginx</p>
+
+<button onclick="getApi()">Check API</button>
+
+<p id="result"></p>
+
+<script>
+
+function getApi(){
+
+fetch('/api')
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("result").innerHTML=data.message;
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
