@@ -1,0 +1,72 @@
+# ==========================
+# Node.js Dependencies
+# ==========================
+node_modules/
+
+# ==========================
+# Environment Variables
+# ==========================
+.env
+.env.*
+!.env.example
+
+# ==========================
+# Logs
+# ==========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================
+# PM2
+# ==========================
+.pm2/
+
+# ==========================
+# Build Output
+# ==========================
+dist/
+build/
+coverage/
+
+# ==========================
+# Temporary Files
+# ==========================
+tmp/
+temp/
+.cache/
+
+# ==========================
+# Operating System Files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# IDE Files
+# ==========================
+.vscode/
+.idea/
+*.swp
+
+# ==========================
+# Jenkins (if present in project)
+# ==========================
+.jenkins/
+
+# ==========================
+# Package Manager Cache
+# ==========================
+.npm/
+.yarn/
+.pnpm-store/
+
+# ==========================
+# Runtime PID Files
+# ==========================
+*.pid
+*.seed
+*.pid.lock
