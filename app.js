@@ -17,6 +17,8 @@ app.get("/api", (req, res) => {
 
 });
 
+ console.log("Welcome to the webpage of dhanush");
+
 app.listen(PORT, () => {
 
     console.log(`Server running on http://localhost:${PORT}`);
