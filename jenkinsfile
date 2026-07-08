@@ -1,0 +1,89 @@
+pipeline {
+
+    agent any
+
+    options {
+        disableConcurrentBuilds()
+
+        buildDiscarder(logRotator(
+            daysToKeepStr: '15',
+            numToKeepStr: '10'
+        ))
+
+        timestamps()
+    }
+
+    stages {
+
+        stage('Deploy') {
+
+            steps {
+
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+
+                            configName: 'Ubuntu',
+
+                            transfers: [
+                                sshTransfer(
+
+                                    execCommand: '''
+                                        set -e
+
+                                        cd /home/master/project/nodeapp
+
+                                        echo "Pulling latest code..."
+                                        git pull origin main
+
+                                        echo "Installing dependencies..."
+                                        npm install
+
+                                        if npm run | grep -q "build"; then
+                                            echo "Building application..."
+                                            npm run build
+                                        else
+                                            echo "No build script found. Skipping build."
+                                        fi
+
+                                        echo "Reloading PM2..."
+                                        pm2 reload nodeapp
+
+                                        echo "Saving PM2 process list..."
+                                        pm2 save
+
+                                        echo "Deployment completed successfully."
+                                    '''
+
+                                )
+                            ],
+
+                            verbose: true
+
+                        )
+                    ]
+                )
+
+            }
+
+        }
+
+    }
+
+    post {
+
+        success {
+            echo "Deployment Successful."
+        }
+
+        failure {
+            echo "Deployment Failed."
+        }
+
+        always {
+            cleanWs()
+        }
+
+    }
+
+}
